@@ -6,17 +6,17 @@
              xmlns:collectionViewHeaders="clr-namespace:CollectionViewHeaders"
              x:DataType="viewModels:MainPageViewModel"
              x:Class="CollectionViewHeaders.MainPage">
+    
 
-    <CollectionView ItemsSource="{Binding People}"
-                    Header="{Binding .}">
+    <CollectionView x:Name="Test" ItemsSource="{Binding People}" >
 
         <!-- It does not matter if you use CollectionView.HeaderTemplate, CollectionView.Header
     the result will be the same, HorizontalOptions dont seem to have any effect.
     The Grid in a Header will not take the full width of the CollectionView
     Extracting the Grid out of the HeaderTemplate and placing it above the collectionView does give the desired result
      -->
-        <CollectionView.HeaderTemplate>
-            <DataTemplate>
+
+        <CollectionView.Header>
                 <Grid ColumnDefinitions="*, *, *"
                       BackgroundColor="Red"
                       HorizontalOptions="FillAndExpand"
@@ -25,8 +25,7 @@
                     <Label Grid.Column="1" Text="Name" FontAttributes="Bold" />
                     <Label Grid.Column="2" Text="Image" FontAttributes="Bold" />
                 </Grid>
-            </DataTemplate>
-        </CollectionView.HeaderTemplate>
+        </CollectionView.Header>
 
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="collectionViewHeaders:Person">
@@ -38,5 +37,7 @@
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
+        <CollectionView.Footer> <Grid BackgroundColor="Transparent" Margin="0" RowDefinitions="3"></Grid> </CollectionView.Footer>
     </CollectionView>
+
 </ContentPage>
