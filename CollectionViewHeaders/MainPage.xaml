@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CollectionViewHeaders.ViewModels"
+             xmlns:collectionViewHeaders="clr-namespace:CollectionViewHeaders"
+             x:DataType="viewModels:MainPageViewModel"
+             x:Class="CollectionViewHeaders.MainPage">
+
+    <CollectionView ItemsSource="{Binding People}"
+                    Header="{Binding .}">
+
+        <!-- It does not matter if you use CollectionView.HeaderTemplate, CollectionView.Header
+    the result will be the same, HorizontalOptions dont seem to have any effect.
+    The Grid in a Header will not take the full width of the CollectionView
+    Extracting the Grid out of the HeaderTemplate and placing it above the collectionView does give the desired result
+     -->
+        <CollectionView.HeaderTemplate>
+            <DataTemplate>
+                <Grid ColumnDefinitions="*, *, *"
+                      BackgroundColor="Red"
+                      HorizontalOptions="FillAndExpand"
+                      Padding="10">
+                    <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="Name" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="Image" FontAttributes="Bold" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.HeaderTemplate>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="collectionViewHeaders:Person">
+                <Grid ColumnDefinitions="*, *, *"
+                      Padding="10">
+                    <Label Text="{Binding Id}" Grid.Column="0" />
+                    <Label Text="{Binding Name}" Grid.Column="1" />
+                    <Label Text="{Binding ImageName}" Grid.Column="2" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
